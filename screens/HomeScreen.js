@@ -3,7 +3,7 @@ import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'r
 import { LinearGradient } from 'expo-linear-gradient';
 import ProductCard from '../components/ProductCard';
 import BackButton from '../components/BackButton';
-import axios from 'axios';
+import httpClient from '../api/httpClient';
 
 export default function HomeScreen({ navigation }) {
   const [products, setProducts] = useState([]);
@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await httpClient.get('/apis/items');
         setProducts(response.data);
       } catch (err) {
         console.error('Error fetching products:', err);
